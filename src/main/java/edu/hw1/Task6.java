@@ -59,10 +59,31 @@ public final class Task6 {
         return String.valueOf(ans);
     }
 
+    public static boolean same(int d) {
+        int e = d;
+        boolean flag = true;
+        int n = e % 10;
+        e /= 10;
+        while (e != 0) {
+            if (e % 10 != n) {
+                flag = false;
+                break;
+            }
+            e /= 10;
+
+        }
+        return flag;
+    }
+
     public static int countK(int d) {
-        if (Task2.cnt(d) != 4) {
+        if (Task2.cnt(d) != 4 || Task6.same(d)) {
             return -1;
         }
+        return count(d);
+
+    }
+
+    public static int count(int d) {
         String max = getmax(d);
         int t = 0;
         String min = getmin(d);
@@ -73,7 +94,7 @@ public final class Task6 {
             return t;
         } else {
             step += 1;
-            return countK(w);
+            return count(w);
         }
 
     }

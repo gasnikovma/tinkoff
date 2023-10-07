@@ -26,4 +26,12 @@ class Task6Test {
         assertThat(res).isEqualTo(-1);
     }
 
+    @Test
+    @DisplayName("Все цифры одинаковые")
+    void countK_ShouldReturnMinus_1_whenTheDigitsAreTheSame() {
+        int a = 4444;
+        int res = Task6.countK(a);
+        assertThat(res).isEqualTo(-1);
+    }
+
 }

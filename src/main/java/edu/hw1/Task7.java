@@ -14,6 +14,9 @@ public final class Task7 {
     }
 
     public static int rotateLeft(int n, int shift) {
+        if (n <= 0) {
+            return -1;
+        }
         String s = toBinary(n).trim();
         char[] a = s.toCharArray();
         char[] b = new char[a.length];
@@ -23,6 +26,9 @@ public final class Task7 {
     }
 
     public static int rotateRight(int n, int shift) {
+        if (n <= 0) {
+            return -1;
+        }
         String s = toBinary(n).trim();
         char[] a = s.toCharArray();
         char[] b = new char[a.length];
