@@ -3,19 +3,31 @@ package edu.hw1;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class Task3Test {
-    @Test
-    @DisplayName("Проверка на null")
-    void put_shouldThrow_Exception() {
-        NullPointerException thrown = Assertions.assertThrows(NullPointerException.class, () -> {
-            int[] a = null;
-            int[] b = {1, 4, 5, 6, 9};
+    @ParameterizedTest
+    @MethodSource("provider")
+    void put_shouldThrow_Exception(int[] a, int[] b) {
+        IllegalArgumentException thrown = Assertions.assertThrows(IllegalArgumentException.class, () -> {
+
             Task3.put(a, b);
         });
-        Assertions.assertEquals("some message", thrown.getMessage());
+        Assertions.assertEquals("at least one massive is null", thrown.getMessage());
+    }
+
+    private static Stream<Arguments> provider() {
+        return Stream.of(
+            Arguments.of(null, new int[] {1, 2, 3, 2}),
+            Arguments.of(null, null),
+            Arguments.of(new int[] {5, 12, 67}, null)
+
+        );
     }
 
     @Test
@@ -37,7 +49,7 @@ class Task3Test {
 
     @Test
     @DisplayName("Проверка на вложенность(false)")
-    void put_shouldReturnFalse_whenMAX1EqualsMAX2() {
+    void put_shouldReturnFalse_whenMaxOneEqualsMaxTwo() {
         int[] a = {9, 9, 8};
         int[] b = {8, 9};
         assertFalse(Task3.put(a, b));
@@ -45,7 +57,7 @@ class Task3Test {
 
     @Test
     @DisplayName("Обратная вложенность")
-    void put_shouldReturnFalse_whenMIN1LessMIN2() {
+    void put_shouldReturnFalse_whenMinOneLessMinTwo() {
         int[] a = {1, 2, 3, 4};
         int[] b = {2, 3};
         assertFalse(Task3.put(a, b));

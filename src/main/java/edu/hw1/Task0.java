@@ -11,6 +11,6 @@ public final class Task0 {
     }
 
     public static void greeting() {
-        LOGGER.info("Hello World");
+        LOGGER.info("Привет, мир!");
     }
 }

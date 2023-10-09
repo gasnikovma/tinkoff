@@ -1,6 +1,6 @@
 package edu.hw1;
 
-@SuppressWarnings("checkstyle:magicnumber")
+
 public final class Task4 {
     private Task4() {
 

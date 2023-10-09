@@ -1,19 +1,11 @@
 package edu.hw1;
 
-
-@SuppressWarnings("checkstyle:magicnumber")
 public final class Task3 {
     private Task3() {
 
     }
 
-    public static boolean put(int[] a, int[] b) throws NullPointerException {
-        if (a == null || b == null) {
-            throw new NullPointerException("some message");
-        }
-        if (a.length == 0 || b.length == 0) {
-            return false;
-        }
+    public static int[] minMax(int[] a) {
         var min1 = a[0];
         var max1 = a[0];
         for (int num : a) {
@@ -23,22 +15,20 @@ public final class Task3 {
                 max1 = num;
             }
         }
-        var min2 = b[0];
-        var max2 = b[0];
-        for (int num : b) {
-            if (num < min2) {
-                min2 = num;
-            } else if (num > max2) {
-                max2 = num;
-            }
+
+        return new int[] {max1, min1};
+    }
+
+    public static boolean put(int[] a, int[] b) {
+        if (a == null || b == null) {
+            throw new IllegalArgumentException("at least one massive is null");
         }
-        if (min1 > min2) {
-            if (max2 > max1) {
-                return true;
-            }
+        if (a.length == 0 || b.length == 0) {
             return false;
         }
-        return false;
+        int[] values1 = minMax(a);
+        int[] values2 = minMax(b);
 
+        return values1[1] > values2[1] && values2[0] > values1[0];
     }
 }

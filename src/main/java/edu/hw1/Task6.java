@@ -1,28 +1,28 @@
 package edu.hw1;
 
-@SuppressWarnings("checkstyle:magicnumber")
 public final class Task6 {
     private Task6() {
 
     }
 
-    static int[] hash = new int[10];
     static int step = 0;
 
-    public static String getmax(int num) {
+    @SuppressWarnings("checkstyle:magicnumber")
+    public static String getMax(int num) {
+        int[] hash = new int[10];
         for (int i = 0; i < 10; i++) {
             hash[i] = 0;
         }
         StringBuilder ans = new StringBuilder();
-        int a = Task2.cnt(num);
-        int e = num;
-        while (e > 0) {
-            hash[(e % 10)] += 1;
-            e /= 10;
+        int cntDigits = Task2.countDigits(num);
+        int input = num;
+        while (input > 0) {
+            hash[(input % 10)] += 1;
+            input /= 10;
         }
-        while (a != 4) {
+        while (cntDigits != 4) {
             hash[0] += 1;
-            a += 1;
+            cntDigits += 1;
         }
 
         for (int i = 9; i >= 0; i--) {
@@ -34,20 +34,22 @@ public final class Task6 {
         return String.valueOf(ans);
     }
 
-    public static String getmin(int num) {
+    @SuppressWarnings("checkstyle:magicnumber")
+    public static String getMin(int num) {
+        int[] hash = new int[10];
         for (int i = 0; i < 10; i++) {
             hash[i] = 0;
         }
-        int a = Task2.cnt(num);
+        int cntDigits = Task2.countDigits(num);
         StringBuilder ans = new StringBuilder();
-        int e = num;
-        while (e > 0) {
-            hash[(e % 10)] += 1;
-            e = e / 10;
+        int input = num;
+        while (input > 0) {
+            hash[(input % 10)] += 1;
+            input = input / 10;
         }
-        while (a != 4) {
+        while (cntDigits != 4) {
             hash[0] += 1;
-            a += 1;
+            cntDigits += 1;
         }
 
         for (int i = 0; i <= 9; i++) {
@@ -59,6 +61,7 @@ public final class Task6 {
         return String.valueOf(ans);
     }
 
+    @SuppressWarnings("checkstyle:magicnumber")
     public static boolean same(int d) {
         int e = d;
         boolean flag = true;
@@ -75,18 +78,20 @@ public final class Task6 {
         return flag;
     }
 
+    @SuppressWarnings("checkstyle:magicnumber")
     public static int countK(int d) {
-        if (Task2.cnt(d) != 4 || Task6.same(d)) {
+        if (d <= 0 || Task2.countDigits(d) != 4 || Task6.same(d)) {
             return -1;
         }
         return count(d);
 
     }
 
-    public static int count(int d) {
-        String max = getmax(d);
-        int t = 0;
-        String min = getmin(d);
+    @SuppressWarnings("checkstyle:magicnumber")
+    private static int count(int d) {
+        String max = getMax(d);
+        int t;
+        String min = getMin(d);
         int w = Integer.parseInt(max) - Integer.parseInt(min);
         if (w == 6174) {
             t = step;

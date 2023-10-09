@@ -1,24 +1,29 @@
 package edu.hw1;
 
 public final class Task1 {
+
     private Task1() {
 
     }
 
-    @SuppressWarnings("checkstyle:magicnumber")
+    private static final int SECONDS = 60;
+    private static final int ZERO = 0;
+    private static final String REGEX_DIGIT = "\\d+";
+
     public static int length(String s) {
-        if (s == null || s.equals("")) {
+        if (s == null || s.isBlank()) {
             return -1;
         }
-        String[] d = s.trim().split(":");
-        if (d.length != 2) {
+        String[] d = s.replaceAll("[\\s\t]*", "").split(":");
+        if (d.length != 2 || !d[0].matches(REGEX_DIGIT) || !d[1].matches(REGEX_DIGIT)) {
             return -1;
         }
-        int minutes = Integer.parseInt(d[0].trim());
-        int seconds = Integer.parseInt(d[1].trim());
-        if (seconds >= 60 || minutes < 0 || seconds < 0) {
+
+        int minutes = Integer.parseInt(d[0]);
+        int seconds = Integer.parseInt(d[1]);
+        if (seconds >= SECONDS || minutes < ZERO || seconds < ZERO) {
             return -1;
         }
-        return minutes * 60 + seconds;
+        return minutes * SECONDS + seconds;
     }
 }

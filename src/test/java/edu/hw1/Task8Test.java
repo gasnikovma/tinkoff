@@ -10,7 +10,7 @@ class Task8Test {
     @Test
     @DisplayName("Проверка на null")
     void knightBoardCapture_shouldThrowException_WhenNull() {
-        Exception thrown = Assertions.assertThrows(Exception.class, () -> {
+        IllegalArgumentException thrown = Assertions.assertThrows(IllegalArgumentException.class, () -> {
             int[][] a = null;
             Task8.knightBoardCapture(a);
         });
@@ -20,7 +20,7 @@ class Task8Test {
     @Test
     @DisplayName("Проверка на некорректные размеры массивы")
     void knightBoardCapture_shouldThrowException_WhenInvalidtSize() {
-        Exception thrown = Assertions.assertThrows(Exception.class, () -> {
+        IllegalArgumentException thrown = Assertions.assertThrows(IllegalArgumentException.class, () -> {
             int[][] a = {
                 {0, 0, 0, 0, 1, 0, 0, 0, 1},
                 {0, 0, 0, 0, 0, 1, 0, 0},
@@ -39,7 +39,7 @@ class Task8Test {
     @Test
     @DisplayName("Проверка на некорректные размеры массивы")
     void knightBoardCapture_shouldThrowException_WhenInvalidData() {
-        Exception thrown = Assertions.assertThrows(Exception.class, () -> {
+        IllegalArgumentException thrown = Assertions.assertThrows(IllegalArgumentException.class, () -> {
             int[][] a = {
                 {0, 0, 0, 0, 1, 0, 0, 0},
                 {0, 0, 0, 0, 0, 1, 0, 0},
@@ -57,7 +57,7 @@ class Task8Test {
 
     @Test
     @DisplayName("Не бьют друг друга")
-    void knightBoardCapture_shouldReturnTrue() throws Exception {
+    void knightBoardCapture_shouldReturnTrue() {
         int[][] a = {
             {0, 0, 0, 1, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0},
@@ -71,9 +71,10 @@ class Task8Test {
         boolean res = Task8.knightBoardCapture(a);
         assertTrue(res);
     }
+
     @Test
     @DisplayName("Бьют друг друга")
-    void knightBoardCapture_shouldReturnFalse() throws Exception {
+    void knightBoardCapture_shouldReturnFalse() {
         int[][] a = {
             {1, 0, 1, 0, 1, 0, 1, 0},
             {0, 1, 0, 1, 0, 1, 0, 1},

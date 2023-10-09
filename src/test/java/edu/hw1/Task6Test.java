@@ -20,7 +20,7 @@ class Task6Test {
 
     @Test
     @DisplayName("Нечетырехзначное число")
-    void countK_ShouldReturnMinus_1() {
+    void countK_ShouldReturnMinusOne() {
         int a = 999;
         int res = Task6.countK(a);
         assertThat(res).isEqualTo(-1);
@@ -28,8 +28,15 @@ class Task6Test {
 
     @Test
     @DisplayName("Все цифры одинаковые")
-    void countK_ShouldReturnMinus_1_whenTheDigitsAreTheSame() {
+    void countK_ShouldReturnMinusOne_whenTheDigitsAreTheSame() {
         int a = 4444;
+        int res = Task6.countK(a);
+        assertThat(res).isEqualTo(-1);
+    }
+    @Test
+    @DisplayName("Отрицательное четырехзначное число")
+    void countK_ShouldReturnMinusOne_whenTheInputIsNotValid() {
+        int a = -4444;
         int res = Task6.countK(a);
         assertThat(res).isEqualTo(-1);
     }

@@ -3,7 +3,9 @@ package edu.hw1;
 import java.util.ArrayList;
 import java.util.List;
 
-@SuppressWarnings("checkstyle:magicnumber") public final class Task8 {
+public final class Task8 {
+    private static final int SIZE = 8;
+
     private Task8() {
 
     }
@@ -14,16 +16,16 @@ import java.util.List;
         return (dx == 2 && dy == 1) || (dx == 1 && dy == 2);
     }
 
-    public static boolean knightBoardCapture(int[][] a) throws Exception {
+    public static boolean knightBoardCapture(int[][] a) {
+        if (a == null || a.length != SIZE || a[0].length != SIZE) {
+            throw new IllegalArgumentException("Invalid array size");
+        }
         List<Integer> xcoord = new ArrayList<>();
         List<Integer> ycoord = new ArrayList<>();
-        if (a == null || a.length != 8 || a[0].length != 8) {
-            throw new Exception("Invalid array size");
-        }
         for (int i = 0; i < a.length; i++) {
             for (int j = 0; j < a[i].length; j++) {
                 if (a[i][j] != 0 && a[i][j] != 1) {
-                    throw new Exception("Incorrect data");
+                    throw new IllegalArgumentException("Incorrect data");
                 }
                 if (a[i][j] == 1) {
                     xcoord.add(i);

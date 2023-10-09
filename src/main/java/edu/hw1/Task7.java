@@ -1,39 +1,50 @@
 package edu.hw1;
 
-@SuppressWarnings("checkstyle:magicnumber")
 public final class Task7 {
     private Task7() {
 
     }
 
-    public static String toBinary(int n) {
+    private static String toBinary(int n) {
+        if (n < 0) {
+            throw new IllegalArgumentException("Negative number");
+        }
         if (n == 0) {
             return " ";
         }
         return toBinary(n / 2) + (n % 2);
     }
 
+    @SuppressWarnings("checkstyle:magicnumber")
+    public static int rotateRight(int n, int shift) {
+        if (n <= 0) {
+            return -1;
+        }
+        int offset = shift;
+        String s = toBinary(n).trim();
+        int digit = Integer.parseInt(s);
+        int cntDigits = Task2.countDigits(digit);
+        while (offset > 0) {
+            digit = (int) ((digit % 10) * Math.pow(10, cntDigits - 1) + (digit / 10));
+            offset -= 1;
+        }
+        return Integer.parseInt(String.valueOf(digit), 2);
+    }
+
+    @SuppressWarnings("checkstyle:magicnumber")
     public static int rotateLeft(int n, int shift) {
         if (n <= 0) {
             return -1;
         }
         String s = toBinary(n).trim();
-        char[] a = s.toCharArray();
-        char[] b = new char[a.length];
-        System.arraycopy(a, shift, b, 0, a.length - shift);
-        System.arraycopy(a, 0, b, a.length - shift, shift);
-        return Integer.parseInt(new String(b), 2);
-    }
-
-    public static int rotateRight(int n, int shift) {
-        if (n <= 0) {
-            return -1;
+        int offset = shift;
+        int digit = Integer.parseInt(s);
+        int cntDigits = Task2.countDigits(digit);
+        while (offset > 0) {
+            digit = (int) ((digit % Math.pow(10, cntDigits - 1)) * 10 + (digit / Math.pow(10, cntDigits - 1)));
+            offset -= 1;
         }
-        String s = toBinary(n).trim();
-        char[] a = s.toCharArray();
-        char[] b = new char[a.length];
-        System.arraycopy(a, 0, b, shift, a.length - shift);
-        System.arraycopy(a, a.length - shift, b, 0, shift);
-        return Integer.parseInt(new String(b), 2);
+        return Integer.parseInt(String.valueOf(digit), 2);
     }
 }
+
