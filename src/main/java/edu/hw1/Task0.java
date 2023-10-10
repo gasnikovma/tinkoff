@@ -10,7 +10,7 @@ public final class Task0 {
 
     }
 
-    public static void greeting() {
+    public static void printGreetings() {
         LOGGER.info("Привет, мир!");
     }
 }

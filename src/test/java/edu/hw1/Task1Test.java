@@ -13,7 +13,7 @@ class Task1Test {
         //given
         String s = "";
         //when
-        int res = Task1.length(s);
+        int res = Task1.getLength(s);
         //then
         assertThat(res).isEqualTo(-1);
     }
@@ -24,7 +24,7 @@ class Task1Test {
         //given
         String s = "  999   :59  ";
         //when
-        int res = Task1.length(s);
+        int res = Task1.getLength(s);
         //then
         assertThat(res).isEqualTo(59999);
     }
@@ -35,7 +35,7 @@ class Task1Test {
         //given
         String s = "999:63";
         //when
-        int res = Task1.length(s);
+        int res = Task1.getLength(s);
         //then
         assertThat(res).isEqualTo(-1);
     }
@@ -44,7 +44,7 @@ class Task1Test {
     @ValueSource(strings = {"34", "12:56:32"})
     @DisplayName("Некорректный ввод")
     void length_shouldReturnError_when_InvalidInput(String a) {
-        int res = Task1.length(a);
+        int res = Task1.getLength(a);
         //then
         assertThat(res).isEqualTo(-1);
     }
@@ -54,7 +54,7 @@ class Task1Test {
         //given
         String s = "12:be";
         //when
-        int res = Task1.length(s);
+        int res = Task1.getLength(s);
         //then
         assertThat(res).isEqualTo(-1);
     }

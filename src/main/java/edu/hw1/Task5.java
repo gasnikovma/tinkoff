@@ -27,35 +27,35 @@ public final class Task5 {
         }
         int input = s;
         int res;
-        boolean flag;
         while (Task2.countDigits(input) > 1) {
             res = 0;
             int n = 1;
-            flag = true;
+            boolean isFirstIteration = true;
             while (input != 0) {
                 int digit1 = input % 10;
                 input /= 10;
                 int digit2 = input % 10;
                 input /= 10;
-                if (flag) {
+                if (isFirstIteration) {
                     res = (digit1 + digit2);
-                    flag = false;
+                    isFirstIteration = false;
                 } else {
                     int curRes = res;
                     n = (int) Math.pow(10, Task2.countDigits(curRes));
                     res = (digit1 + digit2) * n + res;
                 }
             }
-            boolean flag1 = true;
+            boolean checkPalindrome = true;
             boolean isPalindrome = isPalindrome(res);
-            if (isPalindrome && Task2.countDigits(res) != 1) {
-                flag1 = true;
+            int cntDigits = Task2.countDigits(res);
+            if (isPalindrome && cntDigits != 1) {
+                checkPalindrome = true;
             }
-            if (Task2.countDigits(res) == 1) {
-                flag1 = false;
+            if (cntDigits == 1) {
+                checkPalindrome = false;
             }
-            if (isPalindrome || Task2.countDigits(res) == 1) {
-                return flag1;
+            if (isPalindrome || cntDigits == 1) {
+                return checkPalindrome;
             }
             input = res;
         }

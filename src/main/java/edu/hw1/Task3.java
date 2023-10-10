@@ -5,7 +5,7 @@ public final class Task3 {
 
     }
 
-    public static int[] minMax(int[] a) {
+    private static int[] getMinMax(int[] a) {
         var min1 = a[0];
         var max1 = a[0];
         for (int num : a) {
@@ -26,8 +26,8 @@ public final class Task3 {
         if (a.length == 0 || b.length == 0) {
             return false;
         }
-        int[] values1 = minMax(a);
-        int[] values2 = minMax(b);
+        int[] values1 = getMinMax(a);
+        int[] values2 = getMinMax(b);
 
         return values1[1] > values2[1] && values2[0] > values1[0];
     }

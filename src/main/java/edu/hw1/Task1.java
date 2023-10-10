@@ -1,16 +1,15 @@
 package edu.hw1;
 
 public final class Task1 {
+    private static final int SECONDS = 60;
+    private static final int ZERO = 0;
+    private static final String REGEX_DIGIT = "\\d+";
 
     private Task1() {
 
     }
 
-    private static final int SECONDS = 60;
-    private static final int ZERO = 0;
-    private static final String REGEX_DIGIT = "\\d+";
-
-    public static int length(String s) {
+    public static int getLength(String s) {
         if (s == null || s.isBlank()) {
             return -1;
         }
