@@ -26,10 +26,9 @@ public final class Task5 {
             return false;
         }
         int input = s;
-        int res;
         while (Task2.countDigits(input) > 1) {
-            res = 0;
-            int n = 1;
+            int res = 0;
+            int n;
             boolean isFirstIteration = true;
             while (input != 0) {
                 int digit1 = input % 10;

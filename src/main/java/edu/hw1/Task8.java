@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public final class Task8 {
-    private static final int SIZE = 8;
+    private static final int BOARD_SIZE = 8;
 
     private Task8() {
 
@@ -17,7 +17,7 @@ public final class Task8 {
     }
 
     public static boolean knightBoardCapture(int[][] a) {
-        if (a == null || a.length != SIZE || a[0].length != SIZE) {
+        if (a == null || a.length != BOARD_SIZE || a[0].length != BOARD_SIZE) {
             throw new IllegalArgumentException("Invalid array size");
         }
         List<Integer> xcoord = new ArrayList<>();

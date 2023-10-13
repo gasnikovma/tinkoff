@@ -6,14 +6,19 @@ public final class Task7 {
 
     }
 
-    private static String toBinary(int n) {
-        if (n < 0) {
-            throw new IllegalArgumentException("Negative number");
+    @SuppressWarnings("checkstyle:magicnumber")
+    private static int decToBinary(int n) {
+        int a = 1;
+        for (int i = 31; i >= 0; i--) {
+            int k = n >> i;
+            if ((k & 1) > 0) {
+                a *= 10;
+                a += 1;
+            } else {
+                a *= 10;
+            }
         }
-        if (n == 0) {
-            return " ";
-        }
-        return toBinary(n / 2) + (n % 2);
+        return a;
     }
 
     @SuppressWarnings("checkstyle:magicnumber")
@@ -22,8 +27,7 @@ public final class Task7 {
             return -1;
         }
         int offset = shift;
-        String s = toBinary(n).trim();
-        int digit = Integer.parseInt(s);
+        int digit = decToBinary(n);
         int cntDigits = Task2.countDigits(digit);
         while (offset > 0) {
             digit = (int) ((digit % 10) * Math.pow(10, cntDigits - 1) + (digit / 10));
@@ -37,9 +41,8 @@ public final class Task7 {
         if (n <= 0) {
             return -1;
         }
-        String s = toBinary(n).trim();
+        int digit = decToBinary(n);
         int offset = shift;
-        int digit = Integer.parseInt(s);
         int cntDigits = Task2.countDigits(digit);
         while (offset > 0) {
             digit = (int) ((digit % Math.pow(10, cntDigits - 1)) * 10 + (digit / Math.pow(10, cntDigits - 1)));

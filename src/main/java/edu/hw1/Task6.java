@@ -10,8 +10,6 @@ public final class Task6 {
 
     }
 
-    static int step = 0;
-
     private static String[] getMaxMin(int num) {
         int[] hash = new int[10];
         Arrays.fill(hash, 0);
@@ -60,21 +58,17 @@ public final class Task6 {
         if (d <= 0 || Task2.countDigits(d) != 4 || Task6.isSame(d)) {
             return -1;
         }
-        return count(d);
+        return count(d, 0);
 
     }
 
-    private static int count(int d) {
+    private static int count(int d, int step) {
         String[] a = getMaxMin(d);
-        int t;
         int diff = Integer.parseInt(a[0]) - Integer.parseInt(a[1]);
         if (diff == KAPREKAR) {
-            t = step;
-            step = 0;
-            return t;
+            return step;
         } else {
-            step += 1;
-            return count(diff);
+            return count(diff, step + 1);
         }
 
     }

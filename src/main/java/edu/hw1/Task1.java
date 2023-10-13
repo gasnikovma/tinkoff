@@ -1,8 +1,7 @@
 package edu.hw1;
 
 public final class Task1 {
-    private static final int SECONDS = 60;
-    private static final int ZERO = 0;
+    private static final int UPPER_SECONDS_LIMIT = 60;
     private static final String REGEX_DIGIT = "\\d+";
 
     private Task1() {
@@ -13,16 +12,16 @@ public final class Task1 {
         if (s == null || s.isBlank()) {
             return -1;
         }
-        String[] d = s.replaceAll("[\\s\t]*", "").split(":");
-        if (d.length != 2 || !d[0].matches(REGEX_DIGIT) || !d[1].matches(REGEX_DIGIT)) {
+        String[] digits = s.replaceAll("[\\s\t]*", "").split(":");
+        if (digits.length != 2 || !digits[0].matches(REGEX_DIGIT) || !digits[1].matches(REGEX_DIGIT)) {
             return -1;
         }
 
-        int minutes = Integer.parseInt(d[0]);
-        int seconds = Integer.parseInt(d[1]);
-        if (seconds >= SECONDS || minutes < ZERO || seconds < ZERO) {
+        int minutes = Integer.parseInt(digits[0]);
+        int seconds = Integer.parseInt(digits[1]);
+        if (seconds >= UPPER_SECONDS_LIMIT || minutes < 0 || seconds < 0) {
             return -1;
         }
-        return minutes * SECONDS + seconds;
+        return minutes * UPPER_SECONDS_LIMIT + seconds;
     }
 }
