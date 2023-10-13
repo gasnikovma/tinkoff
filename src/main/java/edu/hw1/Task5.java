@@ -47,9 +47,6 @@ public final class Task5 {
             boolean checkPalindrome = true;
             boolean isPalindrome = isPalindrome(res);
             int cntDigits = Task2.countDigits(res);
-            if (isPalindrome && cntDigits != 1) {
-                checkPalindrome = true;
-            }
             if (cntDigits == 1) {
                 checkPalindrome = false;
             }
