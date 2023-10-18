@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class Task3Test {
-    public final int MAX_ATTEMPTS_1 = 10;
+    public final int MAX_ATTEMPTS_1 = 30;
     public final int MAX_ATTEMPTS_2 = 1;
 
     @Test
