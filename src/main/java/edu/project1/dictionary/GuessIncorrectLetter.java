@@ -3,7 +3,7 @@ package edu.project1.dictionary;
 public class GuessIncorrectLetter {
 
     private final Message message;
-    private static int attempts = 0;
+    public static int attempts = 0;
 
     public GuessIncorrectLetter(Message message) {
         this.message = message;

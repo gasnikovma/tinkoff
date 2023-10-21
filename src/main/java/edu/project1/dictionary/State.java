@@ -1,6 +1,7 @@
 package edu.project1.dictionary;
 
 public class State {
+
     Message message;
 
     private State(Message message) {
@@ -8,7 +9,7 @@ public class State {
 
     }
 
-    private static boolean isInProgress = true;
+    public static boolean isInProgress = true;
 
     public static boolean isInProgess() {
         return isInProgress;

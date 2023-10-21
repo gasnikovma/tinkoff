@@ -6,13 +6,13 @@ import java.util.Set;
 public class Word {
     private static String hiddenWord;
     private static Set<Character> letterInWord;
+    private final StringBuilder guessedString;
+    private final Dictionary dictionary;
+
 
     public StringBuilder getGuessedString() {
         return guessedString;
     }
-
-    private final StringBuilder guessedString;
-    private final Dictionary dictionary;
 
     public Word(final String[] words, Dictionary dictionary) {
         this.dictionary = dictionary;

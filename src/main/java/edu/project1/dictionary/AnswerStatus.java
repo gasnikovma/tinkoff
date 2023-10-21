@@ -2,7 +2,7 @@ package edu.project1.dictionary;
 
 public enum AnswerStatus {
     START("The word was made up"),
-    GUESS_LETTER("Guess a letter:"),
+
     LETTER_IS_GUESSED("Hit! The letter is %c"),
     LETTER_IS_NOT_GUESSED("Wrong!"),
     WIN("You won!"),

@@ -3,28 +3,31 @@ package edu.project1.dictionary;
 import java.util.Scanner;
 
 public class Session {
-    private static final Dictionary Dictionary = new DictionaryImpl();
-    private static final Message Message = new MessageImpl();
+    private final Dictionary dictionary;
+    private final Message message;
+    private final Reader reader;
 
-    private Session() {
+    public Session(Dictionary dictionary, Message message, Reader reader) {
+        this.dictionary = dictionary;
+        this.message = message;
+        this.reader = reader;
 
     }
 
-    public static void playGame() {
-        Word word = new Word(Configuration.words, Dictionary);
-        Message.startGame();
+    public void playGame() {
+        Word word = new Word(Configuration.words, dictionary);
+        message.startGame();
 
         while (State.isInProgess()) {
-
-            Character inputLetter = inputLetter();
-
+            String in = input();
+            Character inputLetter = inputLetter(in);
             if (!inputLetter.equals('\u0000')) {
                 if (word.isCharInWord(inputLetter)) {
-                    GuessCorrectLetter letterGuess = new GuessCorrectLetter(Message);
+                    GuessCorrectLetter letterGuess = new GuessCorrectLetter(message);
                     letterGuess.handleGuessedLetter(word, inputLetter);
 
                 } else {
-                    GuessIncorrectLetter letterGuess = new GuessIncorrectLetter(Message);
+                    GuessIncorrectLetter letterGuess = new GuessIncorrectLetter(message);
                     letterGuess.handleNotGuessedLetter(word);
                 }
             }
@@ -32,17 +35,20 @@ public class Session {
         }
     }
 
-    private static char inputLetter() {
+    private String input() {
+        return reader.getLine();
+    }
 
-        Scanner scanner = new Scanner(System.in);
-        String input = scanner.nextLine();
+    public char inputLetter(String input) {
         if (input.length() == 1) {
             return input.charAt(0);
-        } else if (input.equals("give up") || input.equals("GIVE UP")) {
-            State.finishGame(false, Message);
+        } else if (input.equalsIgnoreCase("give up")) {
+            State.finishGame(false, message);
             return 0;
         } else {
-            return 0;
+            State.finishGame(false, message);
+            throw new IllegalArgumentException("more than one letter");
+
         }
     }
 }
