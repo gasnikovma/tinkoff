@@ -9,7 +9,7 @@ public class Main {
         Dictionary dictionary = new DictionaryImpl();
         Message message = new MessageImpl();
         Reader reader = new ReaderImpl();
-        Session session = new Session(dictionary, message,reader);
+        Session session = new Session(dictionary, message, reader);
         session.playGame();
     }
 }

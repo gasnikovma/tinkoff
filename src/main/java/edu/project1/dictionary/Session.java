@@ -1,7 +1,5 @@
 package edu.project1.dictionary;
 
-import java.util.Scanner;
-
 public class Session {
     private final Dictionary dictionary;
     private final Message message;
