@@ -5,7 +5,7 @@ import org.apache.logging.log4j.Logger;
 
 public class FaultyConnection implements Connection {
     private final static Logger LOGGER = LogManager.getLogger();
-    private final double CEIL = 0.9;
+    private final static double CEIL = 0.9;
 
     @Override
     public void execute(String command) {
