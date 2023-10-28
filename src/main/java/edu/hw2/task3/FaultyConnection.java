@@ -5,11 +5,11 @@ import org.apache.logging.log4j.Logger;
 
 public class FaultyConnection implements Connection {
     private final static Logger LOGGER = LogManager.getLogger();
+    private final double CEIL = 0.9;
 
     @Override
-    @SuppressWarnings("MagicNumber")
     public void execute(String command) {
-        if (Math.random() < 0.9) {
+        if (Math.random() < CEIL) {
             throw new ConnectionException();
         }
         LOGGER.info(String.format("{%s} is executed\n", command));
