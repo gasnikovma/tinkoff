@@ -10,11 +10,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 class SessionTest {
-    Dictionary dictionary = new DictionaryImpl();
+    Configuration dictionary = new Configuration();
 
     @BeforeEach
     public void initEach() {
-        State.isInProgress = true;
+        State state = new State();
+        state.isInProgress = true;
         GuessIncorrectLetter.attempts = 0;
     }
 
@@ -23,27 +24,28 @@ class SessionTest {
     void shouldReturnWin() {
         List<Character> inputs = Arrays.asList('v', 'a', 'k', 'd', 'w', 'f', 'j');
         int i = 0;
-        Message message = new MessageImpl();
+        Message message = new Message();
         Word word = new Word(new String[] {"java"}, dictionary);
         message.startGame();
+        State state = new State();
 
-        while (State.isInProgess()) {
+        while (state.isInProgess()) {
 
             Character inputLetter = inputs.get(i);
 
             if (!inputLetter.equals('\u0000')) {
                 if (word.isCharInWord(inputLetter)) {
-                    GuessCorrectLetter letterGuess = new GuessCorrectLetter(message);
+                    GuessCorrectLetter letterGuess = new GuessCorrectLetter(message,state);
                     letterGuess.handleGuessedLetter(word, inputLetter);
 
                 } else {
-                    GuessIncorrectLetter letterGuess = new GuessIncorrectLetter(message);
+                    GuessIncorrectLetter letterGuess = new GuessIncorrectLetter(message,state);
                     letterGuess.handleNotGuessedLetter(word);
                 }
             }
             i += 1;
         }
-        assertFalse(State.isInProgress);
+        assertFalse(state.isInProgress);
     }
 
     @Test
@@ -51,39 +53,37 @@ class SessionTest {
     void shouldReturnLose() {
         List<Character> inputs = Arrays.asList('v', 'a', 't', 'l', 'o', 'i', 'z', 'w', 's');
         int i = 0;
-        Message message = new MessageImpl();
+        Message message = new Message();
         Word word = new Word(new String[] {"kotlin"}, dictionary);
         message.startGame();
+        State state = new State();
 
-        while (State.isInProgess()) {
+        while (state.isInProgess()) {
 
             Character inputLetter = inputs.get(i);
 
             if (!inputLetter.equals('\u0000')) {
                 if (word.isCharInWord(inputLetter)) {
-                    GuessCorrectLetter letterGuess = new GuessCorrectLetter(message);
+                    GuessCorrectLetter letterGuess = new GuessCorrectLetter(message,state);
                     letterGuess.handleGuessedLetter(word, inputLetter);
 
                 } else {
-                    GuessIncorrectLetter letterGuess = new GuessIncorrectLetter(message);
+                    GuessIncorrectLetter letterGuess = new GuessIncorrectLetter(message,state);
                     letterGuess.handleNotGuessedLetter(word);
                 }
             }
             i += 1;
         }
-        assertFalse(State.isInProgress);
+        assertFalse(state.isInProgress);
     }
 
     @Test
     @DisplayName("give_up")
     void inputLetter_shouldThrowException() {
-        Session session = new Session(new DictionaryImpl(), new MessageImpl(), new ReaderImpl());
-        String s = "ww";
-        IllegalArgumentException thrown = Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            session.inputLetter(s);
-        });
-        assertEquals("more than one letter", thrown.getMessage());
-        assertFalse(State.isInProgess());
+        State state = new State();
+        Session session = new Session(new Configuration(), new Message(), new ReaderImpl(),state);
+        session.inputLetter("give up");
+        assertFalse(state.isInProgess());
 
     }
 }

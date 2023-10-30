@@ -1,18 +1,40 @@
 package edu.project1.dictionary;
 
-public interface Message {
-    void startGame();
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-    void printMistakes(int attempt);
+public class Message {
+    private final static Logger LOGGER = LogManager.getFormatterLogger();
 
-    void printIfGuessLetterCorrectly(Word guessedWord, char letter);
+    public void startGame() {
+        LOGGER.info(AnswerStatus.START);
+    }
 
-    void printIfDidntGuess(Word guessedWord);
+    public void printMistakes(int attempt) {
+        LOGGER.info(AnswerStatus.MISTAKES_INFO.toString(), attempt, Configuration.MAX_ATTEMPTS);
+    }
 
-    void printGivingUp();
+    public void printIfGuessLetterCorrectly(Word guessedWord, char letter) {
+        LOGGER.info(guessedWord.getGuessedString());
+        LOGGER.info(AnswerStatus.LETTER_IS_GUESSED.toString(), letter);
+    }
 
-    void printIfWin();
+    public void printIfDidntGuess(Word word) {
+        LOGGER.info(word.getGuessedString());
+        LOGGER.info(AnswerStatus.LETTER_IS_NOT_GUESSED);
 
-    void printIfDefeat();
+    }
+
+    public void printGivingUp() {
+        LOGGER.info(AnswerStatus.GIVE_UP);
+    }
+
+    public void printIfWin() {
+        LOGGER.info(AnswerStatus.WIN);
+    }
+
+    public void printIfDefeat() {
+        LOGGER.info(AnswerStatus.LOSE);
+    }
 
 }

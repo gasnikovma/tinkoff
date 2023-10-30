@@ -2,20 +2,17 @@ package edu.project1.dictionary;
 
 public class State {
 
-    Message message;
-
-    private State(Message message) {
-        this.message = message;
+    protected State() {
 
     }
 
-    public static boolean isInProgress = true;
+    public boolean isInProgress = true;
 
-    public static boolean isInProgess() {
+    public boolean isInProgess() {
         return isInProgress;
     }
 
-    public static void finishGame(final boolean isWon, Message message) {
+    public void finishGame(final boolean isWon, Message message) {
         isInProgress = false;
         if (isWon) {
             message.printIfWin();

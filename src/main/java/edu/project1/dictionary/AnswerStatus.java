@@ -11,15 +11,15 @@ public enum AnswerStatus {
 
     GIVE_UP("If you want to finish the game, please enter \"give up\" ");
 
-    private final String answer;
+    private final String userMessage;
 
-    AnswerStatus(String answer) {
-        this.answer = answer;
+    AnswerStatus(String userMessage) {
+        this.userMessage = userMessage;
     }
 
     @Override
     public String toString() {
-        return this.answer;
+        return this.userMessage;
     }
 
 }

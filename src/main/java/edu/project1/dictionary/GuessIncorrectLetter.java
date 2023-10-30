@@ -3,10 +3,12 @@ package edu.project1.dictionary;
 public class GuessIncorrectLetter {
 
     private final Message message;
+    private final State state;
     public static int attempts = 0;
 
-    public GuessIncorrectLetter(Message message) {
+    public GuessIncorrectLetter(Message message, State state) {
         this.message = message;
+        this.state = state;
     }
 
     @SuppressWarnings("checkstyle:magicnumber")
@@ -18,7 +20,7 @@ public class GuessIncorrectLetter {
             message.printGivingUp();
         }
         if (attempts == Configuration.MAX_ATTEMPTS) {
-            State.finishGame(false, message);
+            state.finishGame(false, message);
         }
 
     }

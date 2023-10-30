@@ -11,19 +11,19 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class DictionaryImplTest {
-    Dictionary a = new DictionaryImpl();
+    Configuration a = new Configuration();
 
     @ParameterizedTest
     @MethodSource("provide")
     void DictionaryImpl_ShouldReturnSet(String word, Set<Character> unique) {
-        Set<Character> characters = a.getUniqueChar(word);
+        Set<Character> characters = a.getUniqueChars(word);
         assertEquals(unique, characters);
     }
 
     @ParameterizedTest
     @MethodSource("provideForPositions")
     void DictionaryImpl_ShouldReturnList(String word, char letter, List<Integer> indexes) {
-        List<Integer> positions = a.getPositions(word, letter);
+        List<Integer> positions = a.getLetterPositions(word, letter);
         assertEquals(positions, indexes);
     }
 

@@ -6,10 +6,11 @@ public class Main {
     }
 
     public static void main(final String[] args) {
-        Dictionary dictionary = new DictionaryImpl();
-        Message message = new MessageImpl();
+        Configuration configuration = new Configuration();
+        Message message = new Message();
         Reader reader = new ReaderImpl();
-        Session session = new Session(dictionary, message, reader);
+        State state = new State();
+        Session session = new Session(configuration, message, reader, state);
         session.playGame();
     }
 }
