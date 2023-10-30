@@ -4,11 +4,10 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class WordTest {
-    Dictionary dictionary = new DictionaryImpl();
+    Configuration configuration = new Configuration();
 
-    @Test
-    void isCharInWord_ShouldReturnTrue() {
-        Word word = new Word(new String[] {"java", "programming"}, dictionary);
+    @Test void isCharInWord_ShouldReturnTrue() {
+        Word word = new Word(new String[] {"java", "programming"}, configuration);
         char letter = 'a';
         assertTrue(word.isCharInWord(letter));
     }
