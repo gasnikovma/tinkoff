@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public class ReverseIterator<T> implements Iterator<T> {
     private final List<T> list;
@@ -21,6 +22,10 @@ public class ReverseIterator<T> implements Iterator<T> {
 
     @Override
     public T next() {
+        if (index < 0) {
+            throw new NoSuchElementException("выход за пределы массива");
+        }
+
         return list.get(index--);
     }
 }

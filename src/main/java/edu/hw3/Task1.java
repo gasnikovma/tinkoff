@@ -8,17 +8,17 @@ public class Task1 {
     }
 
     private static final int ALPHABET_SIZE = 26;
+    private static final HashMap<Character, Character> CONVERTER = new HashMap<>();
 
     public static String atbash(String s) {
-        HashMap<Character, Character> converter = new HashMap<>();
         for (int i = 0; i < ALPHABET_SIZE; i++) {
-            converter.put((char) ('A' + i), (char) ('A' + ALPHABET_SIZE - i - 1));
-            converter.put((char) ('a' + i), (char) ('a' + ALPHABET_SIZE - i - 1));
+            CONVERTER.put((char) ('A' + i), (char) ('A' + ALPHABET_SIZE - i - 1));
+            CONVERTER.put((char) ('a' + i), (char) ('a' + ALPHABET_SIZE - i - 1));
         }
         StringBuilder a = new StringBuilder(s);
         for (int i = 0; i < s.length(); i++) {
-            if (converter.containsKey(s.charAt(i))) {
-                a.setCharAt(i, converter.get(s.charAt(i)));
+            if (CONVERTER.containsKey(s.charAt(i))) {
+                a.setCharAt(i, CONVERTER.get(s.charAt(i)));
             } else {
                 a.setCharAt(i, s.charAt(i));
             }
