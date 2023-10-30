@@ -4,9 +4,9 @@ public class GuessCorrectLetter {
     private final Message message;
     private final State state;
 
-    public GuessCorrectLetter(Message message,State state) {
+    public GuessCorrectLetter(Message message, State state) {
         this.message = message;
-        this.state=state;
+        this.state = state;
     }
 
     public void handleGuessedLetter(final Word word, final char letter) {

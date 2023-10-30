@@ -6,11 +6,11 @@ public class Session {
     private final Reader reader;
     private final State state;
 
-    public Session(Configuration configuration, Message message, Reader reader,State state) {
+    public Session(Configuration configuration, Message message, Reader reader, State state) {
         this.configuration = configuration;
         this.message = message;
         this.reader = reader;
-        this.state=state;
+        this.state = state;
 
     }
 
@@ -22,11 +22,11 @@ public class Session {
             Character inputLetter = inputLetter(in);
             if (!inputLetter.equals('\u0000')) {
                 if (word.isCharInWord(inputLetter)) {
-                    GuessCorrectLetter letterGuess = new GuessCorrectLetter(message,state);
+                    GuessCorrectLetter letterGuess = new GuessCorrectLetter(message, state);
                     letterGuess.handleGuessedLetter(word, inputLetter);
 
                 } else {
-                    GuessIncorrectLetter letterGuess = new GuessIncorrectLetter(message,state);
+                    GuessIncorrectLetter letterGuess = new GuessIncorrectLetter(message, state);
                     letterGuess.handleNotGuessedLetter(word);
                 }
             }
