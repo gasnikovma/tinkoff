@@ -4,9 +4,9 @@ import java.time.LocalDate;
 import java.util.Optional;
 
 public class DateByWordHandler extends Handler {
-    protected DateLikeHandler nextHandler;
+    protected Handler nextHandler;
 
-    public DateByWordHandler(DateLikeHandler nextHandler) {
+    public DateByWordHandler(Handler nextHandler) {
         this.nextHandler = nextHandler;
     }
 

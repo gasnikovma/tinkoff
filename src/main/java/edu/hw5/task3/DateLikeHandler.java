@@ -5,9 +5,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 public class DateLikeHandler extends Handler {
-    public DaysAgoHandler nextHandler;
+    public Handler nextHandler;
 
-    public DateLikeHandler(DaysAgoHandler nextHandler) {
+    public DateLikeHandler(Handler nextHandler) {
         this.nextHandler = nextHandler;
     }
 

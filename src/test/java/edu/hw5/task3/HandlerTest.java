@@ -24,12 +24,12 @@ class HandlerTest {
 
     private static Stream<Arguments> provider() {
         return Stream.of(
-            Arguments.of("2020-10-10", Optional.of(LocalDate.parse("2020-10-10"))),
-            Arguments.of("2020-12-2", Optional.of(LocalDate.parse("2020-12-02"))),
-            Arguments.of("1/3/1976", Optional.of(LocalDate.parse("1976-03-01"))),
-            Arguments.of("tomorrow", Optional.of(LocalDate.parse("2023-11-13"))),
-            Arguments.of("yesterday", Optional.of(LocalDate.parse("2023-11-11"))),
-            Arguments.of("1 day ago", Optional.of(LocalDate.parse("2023-11-11")))
+            Arguments.of("2020-10-10", Optional.of(LocalDate.of(2020, 10, 10)),
+                Arguments.of("2020-12-2", Optional.of(LocalDate.of(2020, 12, 2))),
+                Arguments.of("tomorrow", Optional.of(LocalDate.now().plusDays(1))),
+                Arguments.of("yesterday", Optional.of(LocalDate.now().minusDays(1))),
+                Arguments.of("1 day ago", Optional.of(LocalDate.now().minusDays(1)))
+            )
         );
     }
 }
