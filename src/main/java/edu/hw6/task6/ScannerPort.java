@@ -28,32 +28,20 @@ public class ScannerPort {
     }
 
     public static String checkPort(int port) throws IOException {
-        ServerSocket serverSocket = null;
-        DatagramSocket datagramSocket = null;
-        try {
-            serverSocket = new ServerSocket(port);
+        try (ServerSocket serverSocket = new ServerSocket(port)) {
             return "TCP";
         } catch (IOException e) {
-            try {
-                datagramSocket = new DatagramSocket(port);
-                return "UDP";
-            } catch (IOException exception) {
-                return "";
-            } finally {
-                if (datagramSocket != null) {
-                    datagramSocket.close();
-                }
-            }
-        } finally {
-            if (serverSocket != null) {
-                serverSocket.close();
-            }
+
+        }
+        try (DatagramSocket datagramSocket = new DatagramSocket(port)) {
+            return "UDP";
+        } catch (IOException exception) {
+            return "";
         }
 
     }
 
-    @SuppressWarnings("checkstyle:MagicNumber")
-    private static Map<Integer, String> createMapOfPorts() {
+    @SuppressWarnings("checkstyle:MagicNumber") private static Map<Integer, String> createMapOfPorts() {
         Map<Integer, String> ports = new HashMap<>();
         ports.put(7, "ECHO - testing communication by sending data to the server and receiving the same from it");
         ports.put(21, "FTP - file transfer protocol");
