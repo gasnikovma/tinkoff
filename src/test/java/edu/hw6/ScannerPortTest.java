@@ -1,5 +1,6 @@
-package edu.hw6.task6;
+package edu.hw6;
 
+import edu.hw6.task6.ScannerPort;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
