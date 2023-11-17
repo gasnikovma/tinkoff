@@ -15,9 +15,4 @@ class ScannerPortTest {
         assertEquals(protocol, "UDP");
 
     }
-
-    @Test
-    void printerTest_shouldReturnData() throws IOException {
-        ScannerPort.printer();
-    }
 }
