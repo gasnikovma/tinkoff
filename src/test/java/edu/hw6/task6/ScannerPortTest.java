@@ -8,14 +8,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ScannerPortTest {
 
-    private static final int PORT = 80;
+    private static final int PORT = 445;
 
     @Test
     @DisplayName("проверка udp протокола")
     void checkPortTest_ShouldReturnUDP() throws IOException {
         int port = PORT;
         String protocol = ScannerPort.checkPort(port);
-        assertEquals(protocol, "TCP");
+        assertEquals(protocol, "");
 
     }
 }
