@@ -3,10 +3,8 @@ package edu.project3;
 import edu.project3.api.LogsApi;
 import edu.project3.model.LogRecord;
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.net.http.HttpResponse;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.OffsetDateTime;
@@ -44,16 +42,16 @@ public class Parser {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MMM/yyyy:HH:mm:ssZ", Locale.ENGLISH);
         OffsetDateTime offsetDateTime =
             OffsetDateTime.parse(elements[3].substring(1).concat(elements[4].substring(0, 5)), dateTimeFormatter);
-        String request = elements[5].concat(elements[6]).substring(1, elements[5].length() + elements[6].length() - 1);
+        String request = elements[5].concat(" ").concat(elements[6]).concat(" ").concat(elements[7]).substring(1, elements[5].length() + elements[6].length()+elements[7].length());
         Integer status = Integer.parseInt(elements[8]);
         Integer bodyBites = Integer.parseInt(elements[9]);
         String httRefer = elements[10].equals("\"-\"") ? null : elements[10];
         StringBuilder userAgentBuilder = new StringBuilder();
         for (int i = 11; i < elements.length-1; i++) {
-            userAgentBuilder.append(elements[i]+" ");
+            userAgentBuilder.append(elements[i]).append(" ");
         }
         userAgentBuilder.append(elements[elements.length-1]);
-        String userAgent = elements[10].equals("\"-\"") ? null : String.valueOf(userAgentBuilder);
+        String userAgent = elements[11].equals("\"-\"") ? null : String.valueOf(userAgentBuilder);
         String httpUserAgent = null;
         if (userAgent != null) {
             httpUserAgent = userAgent.substring(1, userAgent.length() - 1);
