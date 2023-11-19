@@ -5,8 +5,9 @@ import java.time.OffsetDateTime;
 import java.util.Map;
 
 public class MarkdownPrinter implements Printer {
-    @Override
-    public <T> String print(Statistics<T> statistics) {
+    private static final String METRIC = "Metric";
+
+    @Override public <T> String print(Statistics<T> statistics) {
         StringBuilder sb = new StringBuilder();
         sb.append("#### ").append(statistics.title()).append("\n");
         int widthResourceCol = statistics.resource().length();
@@ -28,18 +29,17 @@ public class MarkdownPrinter implements Printer {
                 .append("-".repeat(widthValueCol - 1)).append(":").append("|").append("\n");
 
             for (Map.Entry<T, Integer> ent : ((Map<T, Integer>) statistics.result()).entrySet()) {
-                sb.append("|").append(setTitleOrDivider(ent.getKey(), " ", widthResourceCol))
-                    .append("|").append(setTitleOrDivider(ent.getValue().toString(), " ", widthValueCol))
-                    .append("|").append("\n");
+                sb.append("|").append(setTitleOrDivider(ent.getKey(), " ", widthResourceCol)).append("|")
+                    .append(setTitleOrDivider(ent.getValue().toString(), " ", widthValueCol)).append("|").append("\n");
             }
         }
-        if (statistics.result() instanceof Double || statistics.result() instanceof Integer ||
-            statistics.result() instanceof OffsetDateTime) {
+        if (statistics.result() instanceof Double || statistics.result() instanceof Integer
+            || statistics.result() instanceof OffsetDateTime) {
             String statisticString = statistics.result().toString();
             widthValueCol = Math.max(widthValueCol, statisticString.length());
-            widthResourceCol = Math.max("Metric".length(), widthResourceCol);
+            widthResourceCol = Math.max(METRIC.length(), widthResourceCol);
 
-            sb.append("|").append(setTitleOrDivider("Metric", " ", widthResourceCol)).append("|")
+            sb.append("|").append(setTitleOrDivider(METRIC, " ", widthResourceCol)).append("|")
                 .append(setTitleOrDivider(statistics.value(), " ", widthValueCol)).append("|").append("\n");
             sb.append("|:").append(setTitleOrDivider("", "-", widthResourceCol - 2)).append(":|")
                 .append("-".repeat(widthValueCol - 1)).append(":").append("|").append("\n");

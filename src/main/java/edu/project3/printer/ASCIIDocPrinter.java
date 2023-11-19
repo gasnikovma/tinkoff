@@ -15,15 +15,18 @@ public class ASCIIDocPrinter implements Printer {
         sb.append("[cols=\"1,1\"]").append("\n").append(DIVIDER).append("\n");
 
         if (statistics.result() instanceof Map) {
-            sb.append("|").append(statistics.resource()).append(" |").append(statistics.value()).append(DOUBLE_NEXT_LINE);
+            sb.append("|").append(statistics.resource()).append(" |").append(statistics.value())
+                .append(DOUBLE_NEXT_LINE);
             for (Map.Entry<T, Integer> ent : ((Map<T, Integer>) statistics.result()).entrySet()) {
                 sb.append("|").append(ent.getKey()).append("\n").append("|").append(ent.getValue().toString())
                     .append(DOUBLE_NEXT_LINE);
             }
         }
-        if (statistics.result() instanceof Double || statistics.result() instanceof Integer || statistics.result() instanceof OffsetDateTime) {
+        if (statistics.result() instanceof Double || statistics.result() instanceof Integer
+            || statistics.result() instanceof OffsetDateTime) {
             sb.append("|").append("Metric").append(" |").append(statistics.value()).append(DOUBLE_NEXT_LINE);
-            sb.append("|").append(statistics.resource()).append("\n").append("|").append(statistics.result()).append(DOUBLE_NEXT_LINE);
+            sb.append("|").append(statistics.resource()).append("\n").append("|").append(statistics.result())
+                .append(DOUBLE_NEXT_LINE);
         }
         sb.append(DIVIDER);
         return sb.toString();
