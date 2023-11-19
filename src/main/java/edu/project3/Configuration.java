@@ -26,7 +26,4 @@ public class Configuration {
     public static final String FILE_FOR_DOWNLOAD = "src/main/java/edu/project3/download/data.txt";
     public static final String TEST = "src/main/java/edu/project3/download/test.txt";
 
-    public static final String BASEURI =
-        "https://raw.githubusercontent.com/elastic/examples/master/Common%20Data%20Formats/nginx_logs/nginx_logs";
-
 }

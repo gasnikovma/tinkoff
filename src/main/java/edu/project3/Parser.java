@@ -18,19 +18,19 @@ import java.util.stream.Stream;
 
 public class Parser {
 
+    public static final String FILE_FOR_DOWNLOAD = "src/main/java/edu/project3/download/data.txt";
     public static final String NULL = "-";
 
     public Stream<LogRecord> parse(String string) throws IOException, InterruptedException {
         List<LogRecord> logs = new ArrayList<>();
 
         try {
-            Path of = Path.of(Configuration.FILE_FOR_DOWNLOAD);
+            Path of = Path.of(FILE_FOR_DOWNLOAD);
             if (!Files.exists(of)) {
                 Files.createFile(of);
-                URI uri = URI.create(string);
-                LogsApi.getNginxLogs(uri, Configuration.FILE_FOR_DOWNLOAD);
             }
-
+            URI uri = URI.create(string);
+            LogsApi.getNginxLogs(uri, FILE_FOR_DOWNLOAD);
             try (BufferedReader reader = new BufferedReader(new FileReader(of.toFile()))) {
                 while (reader.ready()) {
                     logs.add(parseLog(reader.readLine()));
