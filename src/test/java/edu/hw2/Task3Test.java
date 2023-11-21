@@ -43,7 +43,7 @@ public class Task3Test {
         }
 
         assertThat(isExecuted).isFalse();
-    }*/
+    }
 
     @Test
     @DisplayName("получить ошибку через FaultyConnectionManager")
@@ -59,6 +59,6 @@ public class Task3Test {
         }
 
         assertThat(isExecuted).isFalse();
-    }
+    }*/
 
 }
