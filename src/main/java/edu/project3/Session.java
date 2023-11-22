@@ -1,15 +1,14 @@
 package edu.project3;
 
-import edu.project3.model.LogRecord;
+import edu.project3.model.Statistics;
 import edu.project3.printer.Printer;
 import edu.project3.printer.PrinterFactory;
 import java.io.IOException;
 import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
+import java.time.format.DateTimeFormatterBuilder;
+import java.time.temporal.ChronoField;
 import java.util.List;
-import java.util.Objects;
-import java.util.stream.Stream;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -19,6 +18,7 @@ public class Session {
     private static final String TO = "--to";
     private static final String FORMAT = "--format";
     private static final String MARKDOWN = "markdown";
+    private static final String ASCII = "adoc";
     private static final Logger LOGGER = LogManager.getLogger();
     private final Parser parser;
     private final PrinterFactory printerFactory;
@@ -32,12 +32,13 @@ public class Session {
         this.printerFactory = printerFactory;
     }
 
-    public void startSession(String[] args) throws IOException, InterruptedException {
+    public <T> void startSession(String[] args) throws IOException, InterruptedException {
         String path = null;
         OffsetDateTime fromDate = null;
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter formatter = new DateTimeFormatterBuilder().appendPattern("yyyy-MM-dd").parseDefaulting(
+            ChronoField.NANO_OF_DAY, 0).parseDefaulting(ChronoField.OFFSET_SECONDS, 0).toFormatter();
         OffsetDateTime toDate = null;
-        String format = "adoc";
+        String format = null;
         for (int i = 0; i < args.length; i++) {
             if (args[i].equals(PATH)) {
                 path = args[i + 1];
@@ -46,30 +47,29 @@ public class Session {
             } else if (args[i].equals(TO)) {
                 toDate = OffsetDateTime.parse(args[i + 1], formatter);
             } else if (args[i].equals(FORMAT)) {
-                format = args[i + 1];
+                if (args[i + 1].equals(MARKDOWN) || args[i + 1].equals(ASCII)) {
+                    format = args[i + 1];
+                }
             }
 
         }
         if (path == null) {
             throw new IllegalArgumentException();
         }
-        Stream<LogRecord> logRecords = parser.parse(path);
-        List<LogRecord> logs = new ArrayList<>(logRecords.toList());
-        if (fromDate != null) {
-            OffsetDateTime from = fromDate;
-            logs = logRecords.filter(x -> x.localTime().isAfter(from)).toList();
+        if (format == null) {
+            throw new IllegalArgumentException();
         }
-        if (toDate != null) {
-            OffsetDateTime to = toDate;
-            logs = logRecords.filter(x -> x.localTime().isAfter(to)).toList();
+        if (fromDate == null) {
+            fromDate = Configuration.DEFAULT_FROM;
         }
-        if (Objects.equals(format, MARKDOWN)) {
-            format = MARKDOWN;
+        if (toDate == null) {
+            toDate = Configuration.DEFAULT_TO;
         }
-        List<LogRecord> finalLogs = logs;
+        List<Statistics<T>> statistics = parser.parse(path, fromDate, toDate);
         Printer printer = printerFactory.createPrinter(format);
-        Configuration.STATISTICS.stream()
-            .forEach(statisticsLogs -> print(printer.print(statisticsLogs.countStatistics(finalLogs))));
+        for (int i = 0; i < statistics.size(); i++) {
+            print(printer.print(statistics.get(i)));
+        }
 
     }
 }

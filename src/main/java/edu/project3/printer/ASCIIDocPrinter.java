@@ -22,7 +22,7 @@ public class ASCIIDocPrinter implements Printer {
                     .append(DOUBLE_NEXT_LINE);
             }
         }
-        if (statistics.result() instanceof Double || statistics.result() instanceof Integer
+        if (statistics.result() instanceof Long || statistics.result() instanceof Integer
             || statistics.result() instanceof OffsetDateTime) {
             sb.append("|").append("Metric").append(" |").append(statistics.value()).append(DOUBLE_NEXT_LINE);
             sb.append("|").append(statistics.resource()).append("\n").append("|").append(statistics.result())

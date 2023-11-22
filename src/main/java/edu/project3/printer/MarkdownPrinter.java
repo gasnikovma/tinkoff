@@ -33,7 +33,7 @@ public class MarkdownPrinter implements Printer {
                     .append(setTitleOrDivider(ent.getValue().toString(), " ", widthValueCol)).append("|").append("\n");
             }
         }
-        if (statistics.result() instanceof Double || statistics.result() instanceof Integer
+        if (statistics.result() instanceof Long || statistics.result() instanceof Integer
             || statistics.result() instanceof OffsetDateTime) {
             String statisticString = statistics.result().toString();
             widthValueCol = Math.max(widthValueCol, statisticString.length());

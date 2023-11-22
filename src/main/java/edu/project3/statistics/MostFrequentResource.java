@@ -2,8 +2,6 @@ package edu.project3.statistics;
 
 import edu.project3.model.LogRecord;
 import edu.project3.model.Statistics;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class MostFrequentResource implements Counter<Map<String, Integer>> {
@@ -11,13 +9,21 @@ public class MostFrequentResource implements Counter<Map<String, Integer>> {
     private static final String RESOURCE = "Resource";
     private static final String VALUE = "Quantity";
 
+    private final Map<String, Integer> frequencyOfResources;
+
+    public MostFrequentResource(Map<String, Integer> frequencyOfResources) {
+        this.frequencyOfResources = frequencyOfResources;
+    }
+
     @Override
-    public Statistics<Map<String, Integer>> countStatistics(List<LogRecord> logRecords) {
-        Map<String, Integer> countResources = new HashMap<>();
-        for (int i = 0; i < logRecords.size(); i++) {
-            String resource = logRecords.get(i).request().split(" ")[1];
-            countResources.put(resource, countResources.getOrDefault(resource, 0) + 1);
-        }
-        return new Statistics<>(TITLE, RESOURCE, VALUE, countResources);
+    public Statistics<Map<String, Integer>> countStatistics() {
+        return new Statistics<>(TITLE, RESOURCE, VALUE, frequencyOfResources);
+    }
+
+    @Override
+    public void getMiddleCalc(LogRecord logRecord) {
+        String resource = logRecord.request().split(" ")[1];
+        frequencyOfResources.put(resource, frequencyOfResources.getOrDefault(resource, 0) + 1);
+
     }
 }
