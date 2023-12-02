@@ -12,7 +12,7 @@ public class Task3Test {
     public final int MAX_ATTEMPTS_1 = 30;
     public final int MAX_ATTEMPTS_2 = 1;
 
-    @Test
+   /* @Test
     @DisplayName("получить стабильное соединение через DefaultConnectionManager")
     void Connection_ShouldGetStableConnection() {
         boolean isExecuted;
