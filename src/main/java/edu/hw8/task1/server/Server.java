@@ -27,7 +27,6 @@ public class Server {
 
     private static final int PORT = 8080;
     private static final String HOST = "localhost";
-    private static final Storage KVSTORAGE = new Storage();
     private final static int PROCESSORS = Runtime.getRuntime().availableProcessors();
     private static final AtomicInteger ACTIVE = new AtomicInteger(0);
     private static final Logger LOGGER = LogManager.getLogger();
@@ -58,7 +57,7 @@ public class Server {
                                 try {
                                     while (client.read(byteBuffer) != -1) {
                                         String request = getAns(byteBuffer, client);
-                                        client.write(ByteBuffer.wrap(KVSTORAGE.getReply(request.substring(
+                                        client.write(ByteBuffer.wrap(Storage.getReply(request.substring(
                                                 0,
                                                 request.length() - 1
                                             ))
