@@ -8,10 +8,16 @@ import java.util.Scanner;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+@SuppressWarnings("UncommentedMain")
 public class ClientSecond {
+    private ClientSecond() {
+
+    }
+
     private static final String SERVER_ADDRESS = "localhost";
     private static final int PORT = 1700;
     private static final Logger LOGGER = LogManager.getLogger();
+    private static final int BUFFER_CAPACITY = 1024;
 
     public static void main(String[] args) {
         try (Scanner scanner = new Scanner(System.in)) {
@@ -22,12 +28,12 @@ public class ClientSecond {
                      OutputStream outputStream = socket.getOutputStream();
                      InputStream inputStream = socket.getInputStream()) {
                     outputStream.write(message.getBytes());
-                    byte[] buffer = new byte[1024];
+                    byte[] buffer = new byte[BUFFER_CAPACITY];
                     int bytesRead = inputStream.read(buffer);
                     String response = new String(buffer, 0, bytesRead);
                     LOGGER.info("Сервер: " + response);
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    throw new RuntimeException("Unable to communicate with server", e);
                 }
             }
 
