@@ -55,6 +55,7 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+            <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
 
             <dependency>
                 <groupId>org.junit</groupId>
@@ -73,6 +74,7 @@
             <version>${jetbrains-annotations.version}</version>
             <scope>provided</scope>
         </dependency>
+
 
         <!-- Logging -->
         <dependency>
@@ -95,6 +97,7 @@
             <version>${assertj.version}</version>
             <scope>test</scope>
         </dependency>
+
     </dependencies>
 
     <build>
