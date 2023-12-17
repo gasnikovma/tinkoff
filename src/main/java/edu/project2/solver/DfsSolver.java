@@ -35,6 +35,7 @@ public class DfsSolver extends Utilities implements Solver {
         return false;
     }
 
+
     @Override public List<Coordinate> solve(Maze maze, Coordinate start, Coordinate end) {
         this.end = end;
         grid = maze.getGrid();
